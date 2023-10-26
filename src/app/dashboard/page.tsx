@@ -10,6 +10,8 @@ import { ClipboardEdit, Clock3, MailOpen, XSquare } from "lucide-react";
 import RoscaDash from "@/components/dashboard/charts/motivos";
 import SolicitacoesDash from "@/components/dashboard/charts/solicitacoes";
 import CriacaoMes from "@/components/dashboard/charts/criacaomes";
+import NotaDash from "@/components/dashboard/charts/nota";
+import SlaDash from "@/components/dashboard/charts/SLA";
 
 const checkAuthentication = () => {
   const authToken = localStorage.getItem("token"); // Ou qualquer outra forma de obter o token
@@ -50,7 +52,7 @@ export default function Dashboard() {
 
   return (
     <main className="h-screen bg-customTrans flex ">
-      <Navbar />
+        <Navbar />
       <div className="max-w-[calc(100vw-12rem)] h-screen flex flex-col items-center ">
         <div className="grid grid-cols-4 grid-rows-1 auto-cols-max gap-10 mt-10 px-10">
           {chamadosAbertos.map((data: any) => (
@@ -102,10 +104,10 @@ export default function Dashboard() {
               <SolicitacoesDash />
             </div>
             <div className="bg-background border rounded flex items-center justify-center p-5">
-              <RoscaDash />
+              <NotaDash />
             </div>
             <div className="bg-background border rounded flex items-center justify-center p-5">
-              <RoscaDash />
+              <SlaDash />
             </div>
           </div>
         )}

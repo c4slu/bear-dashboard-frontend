@@ -11,6 +11,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import Navbar from "@/components/navbar";
 
 const checkAuthentication = () => {
   const authToken = localStorage.getItem("token"); // Ou qualquer outra forma de obter o token
@@ -39,34 +40,49 @@ export default function Dashboard() {
     router.push("/login");
   };
   return (
-    <main className="bg-customTrans h-full">
-      <h1>Dashboard</h1>
-      <button onClick={handleLogout}>Logout</button>
-      <div className=" flex flex-col justify-center items-center">
+    <main className="bg-customTrans flex h-full">
+      <div className="fixed">
+        <Navbar />
+      </div>
+      <div className="flex w-[calc(100vw-10rem)] flex-col justify-center items-center">
         {isLoading ? (
-          <span className="w-3 h-3 bg-white rounded-full animate-ping" />
+          <div className="h-screen w-[100vw]  flex justify-center items-center">
+            <span className="w-3 h-3 bg-white rounded-full animate-ping" />
+          </div>
         ) : (
-          <div className="w-3/4">
+          <div className="ml-64 mt-12 flex justify-center items-center ">
             <Table>
               <TableCaption>A list of your recent invoices.</TableCaption>
               <TableHeader>
                 <TableRow>
-                  <TableHead className="w-[100px]">Id</TableHead>
-                  <TableHead>Motivo</TableHead>
-                  <TableHead>Solicitação</TableHead>
-                  <TableHead className="text-right">Status</TableHead>
-                  <TableHead className="text-right">Data</TableHead>
+                  <TableHead className="w-[500px]">Data</TableHead>
+                  <TableHead>Hora</TableHead>
+                  <TableHead>Status</TableHead>
+                  <TableHead className="text-right">Assunto</TableHead>
+                  <TableHead className="text-right">Informe</TableHead>
+                  <TableHead className="text-right">Responsavel</TableHead>
+                  <TableHead className="text-right">Protocolo</TableHead>
+                  <TableHead className="text-right">Matricula</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
                 {teste.map((data: any) => (
-                  <TableRow key={data.id}>
-                    <TableCell className="font-medium">{data.id}</TableCell>
-                    <TableCell>{data.motivo}</TableCell>
-                    <TableCell>{data.solicitacao}</TableCell>
-                    <TableCell className="text-right">{data.status}</TableCell>
+                  <TableRow key={data.protocolo}>
+                    <TableCell className="font-bold " align="center">
+                      {data.data.slice(0, 10)}
+                    </TableCell>
+                    <TableCell className="font-medium">{data.hora}</TableCell>
+                    <TableCell>{data.status}</TableCell>
+                    <TableCell>{data.assunto}</TableCell>
+                    <TableCell className="text-right">{data.informe}</TableCell>
                     <TableCell className="text-right">
-                      {data.data_criacao}
+                      {data.nome_usuario}
+                    </TableCell>
+                    <TableCell className="text-right">
+                      {data.protocolo}
+                    </TableCell>
+                    <TableCell className="text-right">
+                      {data.matricula_usuario}
                     </TableCell>
                   </TableRow>
                 ))}

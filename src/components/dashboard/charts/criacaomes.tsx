@@ -29,8 +29,7 @@ ChartJS.register(
   Colors,
   BarElement
 );
-
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Axios from "axios";
 
 export default function criacaomes() {
@@ -44,36 +43,68 @@ export default function criacaomes() {
     });
   }, []);
 
+  // Mapeie os dados para obter os meses e quantidades
   const colunas = dados.map((item: any) => item.MES);
   const valores = dados.map((item: any) => item.qtd);
 
+  // Defina a ordem cronológica dos meses
+  const mesesEmOrdemCronologica = [
+    "Janeiro",
+    "Fevereiro",
+    "Março",
+    "Abril",
+    "Maio",
+    "Junho",
+    "Julho",
+    "Agosto",
+    "Setembro",
+    "Outubro",
+    "Novembro",
+    "Dezembro",
+  ];
+
+  // Ordene os meses de acordo com a ordem cronológica
+  const dadosOrdenados = colunas.map((mes, index) => ({
+    mes,
+    qtd: valores[index],
+  }));
+
+  dadosOrdenados.sort((a, b) => {
+    return (
+      mesesEmOrdemCronologica.indexOf(a.mes) -
+      mesesEmOrdemCronologica.indexOf(b.mes)
+    );
+  });
+
+  const colunasEmOrdemCronologica = dadosOrdenados.map((item) => item.mes);
+  const valoresEmOrdemCronologica = dadosOrdenados.map((item) => item.qtd);
+
   const data = {
-    labels: colunas,
+    labels: colunasEmOrdemCronologica,
     datasets: [
       {
         label: "Chamados Abertos",
-        data: valores,
+        data: valoresEmOrdemCronologica,
         backgroundColor: "#ea580c",
-        borderColor: "#fff)",
+        borderColor: "#fff",
       },
     ],
   };
 
   const options = {
-    maintainAspectRatio: false, // Impede que o gráfico mantenha a proporção
-    responsive: true, // Torna o gráfico responsivo
-    width: 400, // Largura do gráfico
-    height: 600, // Altura do gráfico
+    maintainAspectRatio: false,
+    responsive: true,
+    width: 400,
+    height: 600,
     layout: {
       padding: 0.5,
-      //margin: 15,
     },
     scales: {
       y: {
         stacked: true,
         grid: {
           display: true,
-          color: "rgb(555,555,555,0.2)",
+          color: "rgba(555,555,555,0.2)",
         },
       },
       x: {
@@ -82,7 +113,6 @@ export default function criacaomes() {
         },
       },
     },
-
     plugins: {
       legend: {
         position: "top" as const,
@@ -91,7 +121,6 @@ export default function criacaomes() {
             size: 10,
           },
           color: "#A8A29E",
-
           usePointStyle: true,
         },
         reverse: true,
@@ -102,22 +131,17 @@ export default function criacaomes() {
     },
     elements: {
       line: {
-        backgroundColor: "#EA580C",
+        backgroundColor: "#ea580c",
       },
     },
   };
 
   return (
-    <div className="flex h-full w-full flex-col items-center justify-center ">
+    <div className="flex h-full w-full flex-col items-center justify-center">
       <p className="text-xs text-muted-foreground font-semibold">
         Criação por Mês
       </p>
       <Bar options={options} data={data} />
-      {/* {loading ? (
-        <span className="w-3 h-3 bg-white rounded-full animate-ping" />
-      ) : (
-        <Doughnut options={options} data={data} />
-      )} */}
     </div>
   );
 }

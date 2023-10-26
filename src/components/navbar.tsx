@@ -54,7 +54,7 @@ export default function Navbar() {
                   key={page.id}
                   className="hover:text-primary text-[0.8rem] mb-1">
                   <Link
-                    href={page.link}
+                    href={page.id == 1 ? "../dashboard" : page.link}
                     className="flex gap-1.5"
                     target={page.id == 3 ? "__blank" : ""}>
                     {page.name}
