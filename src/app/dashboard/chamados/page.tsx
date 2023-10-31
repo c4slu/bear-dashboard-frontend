@@ -2,16 +2,13 @@
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import Axios from "axios";
-import {
-  Table,
-  TableBody,
-  TableCaption,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
+
 import Navbar from "@/components/navbar";
+import { Payment, columns } from "./columns";
+import { DataTable } from "./data-table";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { Label } from "@/components/ui/label";
+import { Separator } from "@/components/ui/separator";
 
 const checkAuthentication = () => {
   const authToken = localStorage.getItem("token"); // Ou qualquer outra forma de obter o token
@@ -35,60 +32,27 @@ export default function Dashboard() {
     });
   }, []);
 
-  const handleLogout = () => {
-    localStorage.removeItem("token");
-    router.push("/login");
-  };
   return (
-    <main className="bg-customTrans flex h-full">
-      <div className="fixed">
+    <main className="bg-customTrans flex h-screen">
+      <div>
         <Navbar />
       </div>
-      <div className="flex w-[calc(100vw-10rem)] flex-col justify-center items-center">
+      <div className="flex w-[calc(100vw-12rem)] my-5 flex-col items-center">
         {isLoading ? (
-          <div className="h-screen w-[100vw]  flex justify-center items-center">
+          <div className=" flex justify-center items-center">
             <span className="w-3 h-3 bg-white rounded-full animate-ping" />
           </div>
         ) : (
-          <div className="ml-64 mt-12 flex justify-center items-center ">
-            <Table>
-              <TableCaption>A list of your recent invoices.</TableCaption>
-              <TableHeader>
-                <TableRow>
-                  <TableHead className="w-[500px]">Data</TableHead>
-                  <TableHead>Hora</TableHead>
-                  <TableHead>Status</TableHead>
-                  <TableHead className="text-right">Assunto</TableHead>
-                  <TableHead className="text-right">Informe</TableHead>
-                  <TableHead className="text-right">Responsavel</TableHead>
-                  <TableHead className="text-right">Protocolo</TableHead>
-                  <TableHead className="text-right">Matricula</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {teste.map((data: any) => (
-                  <TableRow key={data.protocolo}>
-                    <TableCell className="font-bold " align="center">
-                      {data.data.slice(0, 10)}
-                    </TableCell>
-                    <TableCell className="font-medium">{data.hora}</TableCell>
-                    <TableCell>{data.status}</TableCell>
-                    <TableCell>{data.assunto}</TableCell>
-                    <TableCell className="text-right">{data.informe}</TableCell>
-                    <TableCell className="text-right">
-                      {data.nome_usuario}
-                    </TableCell>
-                    <TableCell className="text-right">
-                      {data.protocolo}
-                    </TableCell>
-                    <TableCell className="text-right">
-                      {data.matricula_usuario}
-                    </TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
+          //<ScrollArea className="max-w-[calc(100vw-12rem)] h-screen pb-16 flex justify-center items-center">
+          <div className="flex flex-col">
+            <h1 className="text-xl font-semibold">Chamados</h1>
+            <Separator />
+            <Label className="text-sm text-muted-foreground">
+              Campos de filtragrem:
+            </Label>
+            <DataTable columns={columns} data={teste} />
           </div>
+          //</ScrollArea>
         )}
       </div>
     </main>
