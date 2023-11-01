@@ -3,10 +3,13 @@ import { Label } from "./ui/label";
 import { Separator } from "./ui/separator";
 import { ExternalLink, LogOut } from "lucide-react";
 import { Button } from "./ui/button";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 
 export default function Navbar() {
   const router = useRouter();
+  const currentPagina = usePathname()
+
+
   const pages = [
     {
       name: "Home",
@@ -28,6 +31,8 @@ export default function Navbar() {
     localStorage.removeItem("token");
     router.push("/login");
   };
+
+  
   return (
     <main className="h-screen bg-[#0C0A09]/80">
       <div className="h-full w-48 border flex flex-col py-8 justify-between items-center">
@@ -47,19 +52,18 @@ export default function Navbar() {
           <Label>Dashboard</Label>
         </div>
         <div>
-          <ul className="cursor-pointer">
+          <ul className="flex-col items-center justify-center cursor-pointer">
             {pages.map((page) => {
               return (
                 <li
                   key={page.id}
-                  className="hover:text-primary text-[0.8rem] mb-1">
+                  className="hover:border-white/60 border-l-2 h-5 pl-2 text-[0.8rem] ">
                   <Link
                     href={page.id == 1 ? "../dashboard" : page.link}
-                    className="flex gap-1.5"
-                    target={page.id == 3 ? "__blank" : ""}>
+                    className={currentPagina == "/"+ page.link ? `flex text-[#FACC15] ap-1.g5` : `flex gap-1.5`} target={page.id == 3 ? "__blank" : ""}>
                     {page.name}
                     {page.id == 3 ? (
-                      <ExternalLink width={14} className="relative -top-2" />
+                      <ExternalLink width={14} />
                     ) : (
                       ""
                     )}

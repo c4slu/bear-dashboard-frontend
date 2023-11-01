@@ -23,6 +23,8 @@ import {
 import { useEffect, useState } from "react";
 import jwt from "jsonwebtoken";
 import { useRouter } from "next/navigation";
+import { Value } from "@radix-ui/react-select";
+import { compileFunction } from "vm";
 
 const checkAuthentication = () => {
   const authToken = localStorage.getItem("token"); // Ou qualquer outra forma de obter o token
@@ -37,6 +39,8 @@ const Login: React.FC = () => {
       router.push("/dashboard");
     }
   }, []);
+
+  
 
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
@@ -55,7 +59,7 @@ const Login: React.FC = () => {
     const credentials = {
       login: userName,
       senha: password,
-      site: "Barueri",
+      site: site,
     };
 
     if (!credentials.login || !credentials.senha || !credentials.site) {
@@ -73,14 +77,14 @@ const Login: React.FC = () => {
       body: JSON.stringify(credentials),
       requestMode: "cors", // Use 'cors' para permitir receber a resposta da API
     };
-
     try {
       const response = await fetch(
-        "https://10.71.201.251/apps/serviceLogin/login",
+        "http://10.71.201.251/apps/serviceLogin/login",
         options
-      );
-      const data = await response.json();
-      setStatusLogin(true);
+        );
+        const data = await response.json();
+        setStatusLogin(true);
+        console.log(site)
 
       if (data.erro == "false") {
         const secret =
@@ -131,11 +135,10 @@ const Login: React.FC = () => {
             <div className="grid w-full items-center gap-4">
               <div className="flex flex-col space-y-1.5">
                 <Select
-                  // onChange={(e: any) => setSite(e.target.value)}
-                  value="Barueri"
-                  disabled>
+                  value={"barueri"}
+                  >
                   <SelectTrigger id="framework">
-                    <SelectValue placeholder="Barueri" />
+                    <SelectValue placeholder={site} />
                   </SelectTrigger>
                   <SelectContent position="popper">
                     <SelectItem value="Barueri">Barueri</SelectItem>

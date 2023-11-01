@@ -19,7 +19,7 @@ export default function DashCard({ value, icon, name, ping }: PropsCard) {
   return (
     <div>
       <Card>
-        <CardHeader className="flex flex-row gap-5">
+        <CardHeader className="flex flex-row justify-between gap-5">
           <div>
             <CardTitle className="flex gap-2 items-center">
               {value}

@@ -33,7 +33,7 @@ export default function Dashboard() {
   }, []);
 
   return (
-    <main className="bg-customTrans flex h-screen">
+    <main className="bg-customTrans flex h-screen overflow-y-hidden">
       <div>
         <Navbar />
       </div>
@@ -43,7 +43,6 @@ export default function Dashboard() {
             <span className="w-3 h-3 bg-white rounded-full animate-ping" />
           </div>
         ) : (
-          //<ScrollArea className="max-w-[calc(100vw-12rem)] h-screen pb-16 flex justify-center items-center">
           <div className="flex flex-col">
             <h1 className="text-xl font-semibold">Chamados</h1>
             <Separator />
@@ -52,7 +51,6 @@ export default function Dashboard() {
             </Label>
             <DataTable columns={columns} data={teste} />
           </div>
-          //</ScrollArea>
         )}
       </div>
     </main>

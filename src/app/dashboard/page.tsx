@@ -51,10 +51,10 @@ export default function Dashboard() {
   }, []);
 
   return (
-    <main className="h-screen bg-customTrans flex ">
+    <main className="h-screen bg-customTrans flex overflow-y-hidden">
         <Navbar />
-      <div className="max-w-[calc(100vw-12rem)] h-screen flex flex-col items-center ">
-        <div className="grid grid-cols-4 grid-rows-1 auto-cols-max gap-10 mt-10 px-10">
+      <div className="w-[calc(100vw-12rem)] h-screen flex flex-col items-center ">
+        <div className="grid w-full grid-cols-4 grid-rows-1 gap-10 mt-10 px-10">
           {chamadosAbertos.map((data: any) => (
             <DashCard
               value={data.qtd}

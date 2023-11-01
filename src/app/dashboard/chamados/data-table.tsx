@@ -59,7 +59,7 @@ export function DataTable<TData, TValue>({
   });
 
   return (
-    <div className="w-[calc(100vw-14rem)] h-full">
+    <div className="w-[calc(100vw-14rem)] ">
       <div className="flex gap-2 items-center py-4">
         <Input
           placeholder="Filter Protocolo..."
