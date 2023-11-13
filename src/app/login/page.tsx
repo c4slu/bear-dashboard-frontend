@@ -1,6 +1,14 @@
 "use client";
 
-import { Loader2 } from "lucide-react";
+import {
+  Form,
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
 
 import {
   Card,
@@ -23,8 +31,7 @@ import {
 import { useEffect, useState } from "react";
 import jwt from "jsonwebtoken";
 import { useRouter } from "next/navigation";
-import { Value } from "@radix-ui/react-select";
-import { compileFunction } from "vm";
+import { Eye } from "lucide-react";
 
 const checkAuthentication = () => {
   const authToken = localStorage.getItem("token"); // Ou qualquer outra forma de obter o token
@@ -39,8 +46,6 @@ const Login: React.FC = () => {
       router.push("/dashboard");
     }
   }, []);
-
-  
 
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
@@ -67,8 +72,6 @@ const Login: React.FC = () => {
       return;
     }
 
-    console.log(credentials);
-
     setloading(true);
 
     const options = {
@@ -81,10 +84,10 @@ const Login: React.FC = () => {
       const response = await fetch(
         "http://10.71.201.251/apps/serviceLogin/login",
         options
-        );
-        const data = await response.json();
-        setStatusLogin(true);
-        console.log(site)
+      );
+      const data = await response.json();
+      setStatusLogin(true);
+      console.log(site);
 
       if (data.erro == "false") {
         const secret =
@@ -130,58 +133,62 @@ const Login: React.FC = () => {
           <CardDescription>Logue com seu usuário de rede</CardDescription>
         </CardHeader>
 
-        <CardContent>
-          <form>
+        <CardContent className="flex flex-col gap-2 ">
+          <form className="flex flex-col gap-2">
             <div className="grid w-full items-center gap-4">
-              <div className="flex flex-col space-y-1.5">
-                <Select
-                  value={"barueri"}
-                  >
-                  <SelectTrigger id="framework">
-                    <SelectValue placeholder={site} />
-                  </SelectTrigger>
-                  <SelectContent position="popper">
-                    <SelectItem value="Barueri">Barueri</SelectItem>
-                    <SelectItem value="FSA">Feira de Santana</SelectItem>
-                    <SelectItem value="SSA">Salvador</SelectItem>
-                    <SelectItem value="Matriz">Matriz</SelectItem>
-                    <SelectItem value="ITB">Itabuna</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-              <div className="flex flex-col space-y-1.5">
-                <Input
-                  id="name"
-                  type="number"
-                  placeholder="Login Rede"
-                  value={userName}
-                  onChange={(e) => setUserName(e.target.value)}
-                />
-              </div>
-              <div className="flex flex-col space-y-1.5">
-                <Input
-                  id="password"
-                  type="password"
-                  placeholder="Senha"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                />
-              </div>
+              <Select onValueChange={(value) => setSite(value)}>
+                <SelectTrigger id="framework">
+                  <SelectValue placeholder="Selecione seu Site..." />
+                </SelectTrigger>
+                <SelectContent position="popper">
+                  <SelectItem value="Barueri">Barueri</SelectItem>
+                  <SelectItem value="FSA">Feira de Santana</SelectItem>
+                  <SelectItem value="SSA">Salvador</SelectItem>
+                  <SelectItem value="ITB">Itabuna</SelectItem>
+                  <SelectItem value="SP">São Paulo</SelectItem>
+                  <SelectItem value="GARCIA">Garcia</SelectItem>
+                  <SelectItem value="COMERCIO">Comercio</SelectItem>
+                  <SelectItem value="CATEDRA">Catedra</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+            <div className="flex flex-col space-y-1.5">
+              <Input
+                id="name"
+                type="text"
+                placeholder="Login Rede"
+                value={userName}
+                onChange={(e) => setUserName(e.target.value)}
+              />
+            </div>
+            <div className="flex items-center justify-center w-full h-[43px] bg-[#0C0A09] border rounded-md ">
+              <Input
+                id="password"
+                type={mostrarSenha ? "text" : "password"}
+                placeholder="Senha"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="border-none"
+              />
+              <Eye
+                className="px-3 hover:bg-white/5 border-l-[1px] w-[50px] h-full cursor-pointer"
+                onClick={toggleSenha}
+              />
             </div>
           </form>
-        </CardContent>
-        <CardFooter className="flex flex-col">
-          <CardDescription className="mb-4">{loginMessage}</CardDescription>
           <Button
             type="submit"
             onClick={handleLogin}
-            disabled={userName && password ? false : true}>
+            disabled={userName && password && site ? false : true}>
             {loading ? (
               <span className="w-3 h-3 bg-white rounded-full animate-ping" />
             ) : (
               <span>Entrar</span>
             )}
           </Button>
+        </CardContent>
+        <CardFooter className="flex flex-col">
+          <CardDescription className="mb-4">{loginMessage}</CardDescription>
         </CardFooter>
       </Card>
     </main>

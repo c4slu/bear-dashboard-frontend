@@ -43,7 +43,7 @@ export default function Dashboard() {
             <span className="w-3 h-3 bg-white rounded-full animate-ping" />
           </div>
         ) : (
-          <div className="flex flex-col">
+          <div className="flex flex-col gap-2">
             <h1 className="text-xl font-semibold">Chamados</h1>
             <Separator />
             <Label className="text-sm text-muted-foreground">
