@@ -60,12 +60,12 @@ export default function Navbar() {
                   className="hover:border-white/60 border-l-2 h-5 pl-2 text-[0.8rem] ">
                   <Link
                     href={page.id == 1 ? "../dashboard" : page.link}
-                    className={currentPagina == "/"+ page.link ? `flex text-[#FACC15] ap-1.g5` : `flex gap-1.5`} target={page.id == 3 ? "__blank" : ""}>
+                    className={currentPagina == "/"+ page.link ? `flex text-[#ffb454] font-black ap-1.g5 ` : `flex gap-1.5`} target={page.id == 3 ? "__blank" : ""}>
                     {page.name}
                     {page.id == 3 ? (
                       <ExternalLink width={14} />
                     ) : (
-                      ""
+                      null
                     )}
                   </Link>
                 </li>
