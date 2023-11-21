@@ -1,5 +1,6 @@
 "use client";
 
+require('dotenv').config();
 
 import {
   Card,
@@ -65,6 +66,8 @@ const Login: React.FC = () => {
 
     setloading(true);
 
+    const apiUrl: string = process.env.NEXT_PUBLIC_APIURL || "";
+
     const options = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -73,16 +76,15 @@ const Login: React.FC = () => {
     };
     try {
       const response = await fetch(
-        "http://10.71.201.251/apps/serviceLogin/login",
+        apiUrl,
         options
       );
       const data = await response.json();
       setStatusLogin(true);
-      console.log(site);
 
       if (data.erro == "false") {
-        const secret =
-          "9bd3717297e6ef69383e2f7999eb7131448e3333f74fa613a09677ca250408e2";
+        const secret = process.env.NEXT_PUBLIC_SECRETJWT
+
 
         if (!secret) {
           console.error("Invalid secret");

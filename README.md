@@ -1,10 +1,53 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# 🐻 Bear Dashboard
 
-## Getting Started
+<img src="https://i.imgur.com/TifZ6dL.png" alt="Exemplo imagem">
 
-First, run the development server:
+> Dashboard analitico de chamados em NextJS, com componentes do Shadcn/UI e com gráficos ChartJS.  
+
+## 📊 Demonstrativo
+
+### .\login:
+<img src="https://i.imgur.com/FJmZ9bK.png" alt="Exemplo imagem">
+
+### .\dashboard:
+<img src="https://i.imgur.com/TifZ6dL.png" alt="Exemplo imagem">
+
+### .\chamados:
+<img src="https://i.imgur.com/xWy6okV.png" alt="Exemplo imagem">
+
+### .\chamados\detalhe:
+<img src="https://i.imgur.com/5M2pj9B.png" alt="Exemplo imagem">
+
+
+
+## 💻 Pré-requisitos
+
+Antes de começar, verifique se você atendeu aos seguintes requisitos:
+
+- Você instalou a versão mais recente de `NodeJS`
+- Você tem uma máquina `<Windows / Linux / Mac>`. 
+
+## 🚀 Instalando Bear Dashboard
+
+Para instalar a Dashboard, siga estas etapas:
+
+Windows:
 
 ```bash
+npm install
+# or
+yarn install
+# or
+pnpm install
+# or
+bun install
+```
+
+## ☕ Usando
+
+Para usar a Dashboard, siga estas etapas:
+
+```
 npm run dev
 # or
 yarn dev
@@ -14,23 +57,36 @@ pnpm dev
 bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 📫 Contribuindo para <nome_do_projeto>
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+Para contribuir com o proejto, siga estas etapas:
 
-## Learn More
+1. Bifurque este repositório.
+2. Crie um branch: `git checkout -b <nome_branch>`.
+3. Faça suas alterações e confirme-as: `git commit -m '<mensagem_commit>'`
+4. Envie para o branch original: `git push origin <nome_do_projeto> / <local>`
+5. Crie a solicitação de pull.
 
-To learn more about Next.js, take a look at the following resources:
+Como alternativa, consulte a documentação do GitHub em [como criar uma solicitação pull](https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/creating-a-pull-request).
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🤝 Colaboradores
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+Agradecemos às seguintes pessoas que contribuíram para este projeto:
 
-## Deploy on Vercel
+<table>
+  <tr>
+    <td align="center">
+      <a href="https://www.c4slu.com/" title="defina o titulo do link">
+        <img src="https://avatars.githubusercontent.com/u/92953037?v=4" width="100px;" alt="Foto do Iuri Silva no GitHub"/><br>
+        <sub>
+          <b>Lucas Rodrigues (c4slu)</b>
+        </sub>
+      </a>
+    </td>
+</table>
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## 📝 Licença
+
+Esse projeto está sob licença. Veja o arquivo [LICENÇA](LICENSE.md) para mais detalhes.

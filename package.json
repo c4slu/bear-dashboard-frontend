@@ -16,6 +16,7 @@
     "@radix-ui/react-separator": "^1.0.3",
     "@radix-ui/react-slot": "^1.0.2",
     "@tanstack/react-table": "^8.10.7",
+    "@types/dotenv": "^8.2.0",
     "apexcharts": "^3.44.0",
     "axios": "^1.5.1",
     "chart.js": "^4.4.0",
