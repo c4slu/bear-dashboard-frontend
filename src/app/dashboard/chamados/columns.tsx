@@ -25,7 +25,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { useState } from "react";
 
 export type Payment = {
-  data: string;
+  data: Date;
   hora: number;
   status: "Aberto" | "Em tratativa" | "fechado";
   assunto: string;
@@ -43,7 +43,7 @@ export const columns: ColumnDef<Payment>[] = [
       return (
         <Button
           variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}>
+          onClick={() => column.toggleSorting(column.getIsSorted() === "desc")}>
           Data
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
@@ -94,6 +94,7 @@ export const columns: ColumnDef<Payment>[] = [
     cell: ({ row }) => {
       const payment = row.original;
       const [copy, setcopy] = useState(false);
+      const f_date = payment.data.toString();
 
       const copiarTexto = async () => {
         await navigator.clipboard.writeText(payment.textarea);
@@ -110,7 +111,7 @@ export const columns: ColumnDef<Payment>[] = [
               <DialogTitle>Informações sobre o chamado</DialogTitle>
               <Label className="pt-5">Data do Chamado:</Label>
               <Separator className="w-1/2" />
-              <DialogDescription>{payment.data}</DialogDescription>
+              <DialogDescription>{f_date}</DialogDescription>
               <Label className="pt-5">Horário de Abertura:</Label>
               <Separator className="w-1/2" />
               <DialogDescription>{payment.hora}</DialogDescription>
